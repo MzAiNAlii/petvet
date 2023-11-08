@@ -4,7 +4,7 @@ import { PetDto } from './dto/pet-dto';
 import { AccessTokenGuard } from 'src/auth/guard/accessToken-guard';
 
 @Controller('pet')
-@UseGuards(AccessTokenGuard)
+//@UseGuards(AccessTokenGuard)
 export class PetController {
     constructor(private readonly petServices: PetService){}
 
@@ -22,6 +22,13 @@ export class PetController {
         return this.petServices.findAllPet(petDto)
     }
 
+    @Get('sreachBreed/:petName/:petBreed')
+    @HttpCode(200)
+    sreachPetBrees(@Param() param: any ){
+        const {petName, petBreed} = param
+        return this.petServices.searchBreed(petName, petBreed)
+    }
+
     @Put('updatePet/:id')
     @HttpCode(200)
     updatePet(@Param('id') id: string,  @Body() petDto: PetDto){
@@ -34,6 +41,8 @@ export class PetController {
     deletePet(@Param() petDto : PetDto){
         return this.petServices.deletePet(petDto)
     }
+
+
    
 
 }

@@ -6,22 +6,22 @@ import { LoginDto } from 'src/user/dto/login-dto';
 
 @Controller()
 export class AuthController {
-    constructor(private readonly authServices : AuthService){}
+    // constructor(private readonly authServices : AuthService){}
 
-    @Post("signup")
-    signup(@Body()signupDto :SignupDto){
-        return this.authServices.signup(signupDto)
-    }
-    @Post("login")
-    @HttpCode(200)
-    login(@Body()loginDto :LoginDto){
-        return this.authServices.login(loginDto)
-    }
+    // @Post("signup")
+    // signup(@Body()signupDto :SignupDto){
+    //     return this.authServices.signup(signupDto)
+    // }
+    // @Post("login")
+    // @HttpCode(200)
+    // login(@Body()loginDto :LoginDto){
+    //     return this.authServices.login(loginDto)
+    // }
     
-    @Get("findAll")
-    @HttpCode(200)
-    findAllUser(){
-        return this.authServices.findAllUser()
-    }
+    // @Get("findAll")
+    // @HttpCode(200)
+    // findAllUser(){
+    //     return this.authServices.findAllUser()
+    // }
     
 }

@@ -45,7 +45,7 @@ constructor (
             message: "OTP send Successfully",
             data:{
                 userId: otpUserData._id,
-                userEail: otpUserData.email
+                userEmail: otpUserData.email
             } 
         }
     }
@@ -185,5 +185,8 @@ constructor (
 
     findByEmail(email: string){
         return this.mailModel.findOne({email})
+    }
+    findById(id: string){
+        return this.mailModel.findById({_id: id})
     }
 }

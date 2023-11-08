@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserModule } from 'src/user/user.module';
@@ -8,7 +8,9 @@ import { AccessTokenStrategy } from './strategy/AccessTokenStrategy';
 import { MailModule } from 'src/mail/mail.module';
 
 @Module({
-  imports: [UserModule, MailModule,
+  imports: [forwardRef(()=>  UserModule), 
+    forwardRef(()=> MailModule),
+  //MailModule,
   JwtModule.registerAsync({
     imports: [ConfigModule],
     inject: [ConfigService],
@@ -19,9 +21,13 @@ import { MailModule } from 'src/mail/mail.module';
         
       }
     }
-  })],
+  }),
+  ConfigModule.forRoot({
+    ignoreEnvFile: true
+  })
+],
   controllers: [AuthController],
   providers: [AuthService, AccessTokenStrategy],
-  exports:[AccessTokenStrategy]
+  exports:[AuthService, AccessTokenStrategy]
 })
 export class AuthModule {}

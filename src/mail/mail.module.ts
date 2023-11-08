@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { MailService } from './mail.service';
 import { MailController } from './mail.controller';
 import { MailerModule } from '@nestjs-modules/mailer';
@@ -6,10 +6,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { mailOtpSchema } from './entities/mail-entity';
 import { UserModule } from 'src/user/user.module';
-
-
 @Module({
-  imports: [UserModule,MailerModule.forRootAsync({
+  imports: [forwardRef(()=> UserModule)
+    ,MailerModule.forRootAsync({
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory:  (configService : ConfigService)=>({

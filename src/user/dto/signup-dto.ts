@@ -1,17 +1,21 @@
-import { IsString, IsEmail, IsBoolean } from "class-validator"
+import { IsString, IsEmail, IsBoolean, IsOptional } from "class-validator"
+import {PickType} from '@nestjs/mapped-types'
 
 export class SignupDto{
 
-    @IsString()
-    userNmae: string
+   
     
     @IsString()
     @IsEmail()
     email: string
-
+   
     @IsString()
     password: string
+   
+    @IsString()
+    fbUserId: string
 
     @IsBoolean()
     is_Online: boolean
 }
+export class fbId extends PickType(SignupDto, ['fbUserId']) {}

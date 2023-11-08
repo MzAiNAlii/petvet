@@ -8,6 +8,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PetModule } from './pet/pet.module';
 import { MailModule } from './mail/mail.module';
 import { ChatModule } from './chat/chat.module';
+import { PetChatModule } from './petChat/petChat.module';
+
 
 
 @Module({
@@ -17,7 +19,7 @@ import { ChatModule } from './chat/chat.module';
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory : async (configService: ConfigService)=>({
-      uri: configService.get<string>("MONGO_URI")
+      uri: configService.get<string>("MONGO_URL")
 
     })
   }),
@@ -26,7 +28,8 @@ import { ChatModule } from './chat/chat.module';
   }),
   PetModule,
   MailModule,
-  ChatModule
+  ChatModule,
+ PetChatModule
   ],
   controllers: [AppController],
   providers: [AppService],
